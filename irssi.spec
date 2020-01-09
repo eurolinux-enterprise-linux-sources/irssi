@@ -3,15 +3,17 @@
 Summary:	Modular text mode IRC client with Perl scripting
 Name:		irssi
 Version:	0.8.15
-Release:	3%{?dist}
+Release:	5%{?dist}
 
 License:	GPLv2+
 Group:		Applications/Communications
 URL:		http://irssi.org/
 Source0:	http://irssi.org/files/irssi-%{version}.tar.bz2
 Source1:	irssi-config.h
+Patch0:		irssi-0.8.15-no-static-unload.patch
+Patch1:		irssi-0.8.15-man-fix.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	ncurses-devel openssl-devel zlib-devel 
+BuildRequires:	ncurses-devel openssl-devel zlib-devel
 BuildRequires:	pkgconfig glib2-devel perl-devel perl(ExtUtils::Embed)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
@@ -35,6 +37,8 @@ being maintained.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1 -b .no-static-unload
+%patch1 -p1 -b .man-fix
 
 %build
 %configure --enable-ipv6 --with-textui	\
@@ -84,6 +88,14 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Aug  3 2012 Jaroslav Škarvada <jskarvad@redhat.com> - 0.8.15-5
+- Removed usage parameter from the man page (popt leftover)
+  Resolves: rhbz#845047
+
+* Fri Jul 13 2012 Jaroslav Škarvada <jskarvad@redhat.com> - 0.8.15-4
+- Disabled unloading of static modules
+  Resolves: rhbz#639258
+
 * Wed May 26 2010 Jaroslav Škarvada <jskarvad@redhat.com> - 0.8.15-3
 - Fixed changelog
 
