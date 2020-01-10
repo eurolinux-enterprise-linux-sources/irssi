@@ -3,7 +3,7 @@
 Summary:	Modular text mode IRC client with Perl scripting
 Name:		irssi
 Version:	0.8.15
-Release:	14%{?dist}
+Release:	16%{?dist}
 
 License:	GPLv2+
 Group:		Applications/Communications
@@ -93,6 +93,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.8.15-16
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.8.15-15
+- Mass rebuild 2013-12-27
+
 * Mon Sep 16 2013 Jaroslav Škarvada <jskarvad@redhat.com> - 0.8.15-14
 - Disabled unloading of static modules (by no-static-unload patch)
   Resolves: rhbz#1007420
